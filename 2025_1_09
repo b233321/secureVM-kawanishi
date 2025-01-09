@@ -1,0 +1,4 @@
+2.4
+ゲスト→GHCBMSR→GHCB→GPA提供
+ハイパバイザ←VMCBオフセット0x00a0←GPA
+ネゴシエート
