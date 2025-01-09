@@ -1,3 +1,5 @@
+SEV-ES Guest-Hypervisor Communication Block Standardization
+
 2.4
 ゲスト→GHCBMSR→GHCB→GPA提供
 ハイパバイザ←VMCBオフセット0x00a0←GPA
@@ -10,3 +12,15 @@ sev-snpゲストが使用するため予約領域→動作環境間での情報�
 →UTFIからOSに制御転送する場合等
 SEV-SNP Confidential Computing Blob EFIプロトコル
 EFIプラットフォーム使用→フォームウェア→EFI構成テーブル使用してページ(シークレット、CPUID)をosに通信
+
+
+ゲストの物理アドレス空間>GHCBロケーション→ゲストによって指定
+GHCBロケーション→メモリの復号化又は共有としてマッピング→ハイパバイザ使用可能→ハイパバイザが直接メモリにアクセスできる
+GHCBゲストの物理アドレスはVMCB(オフセット0xa0)でVMRUN/VMEXIT上のハードウェアで保存される
+ゲストはMSR 0xc001_0130でGHCBの値を読み書き
+ハイパバイザはMSR 0x001_0130へのアクセスをインターセプトしてはいけない
+→したらゲストはGHCBを正常に確立できない
+intercept
+GHCBアドレスは4Kにアライン
+GHCBアドレスの12LBSbitでゲストとハイパバイザ間のGHCBとsev-esの情報をやりとり
+LBS
