@@ -2,3 +2,11 @@
 ゲスト→GHCBMSR→GHCB→GPA提供
 ハイパバイザ←VMCBオフセット0x00a0←GPA
 ネゴシエート
+
+ハイパバイザはsev-snp起動プロセスの一部として,sev-snpゲストにシークレットページとCPUIDページを提供
+SEV-SNPシークレットページ
+snpシークレットページ>オフセット0x00a0~0x00ffの96byte→sev-snpゲストが使用するため予約
+sev-snpゲストが使用するため予約領域→動作環境間での情報通信に利用
+→UTFIからOSに制御転送する場合等
+SEV-SNP Confidential Computing Blob EFIプロトコル
+EFIプラットフォーム使用→フォームウェア→EFI構成テーブル使用してページ(シークレット、CPUID)をosに通信
